@@ -22,11 +22,11 @@ class TrapezoidalRule
     sum = 0.0
 
     (1..@intervals - 1).each do
-      sum += evaluate(@func, @wt0)
+      sum += evaluate(@func, @wt0).floor(1)
       @wt0 += delta
     end
-    func_res = delta * (evaluate(@func, @wt0) + evaluate(@func, @wt_k) / 2 + sum)
-    p func_res.floor
+    func_res = delta * (evaluate(@func, @wt0) + evaluate(@func, @wt_k) / 2 + sum.floor(1))
+    p func_res.floor(1)
   end
 end
 

@@ -18,14 +18,15 @@ class TrapezoidalRule
   end
 
   def find_integral
-    delta = (@wt_k - @wt0) / @intervals
+    k = (2 - 1) * @intervals + 1
+    step = (@wt_k - @wt0).abs / (k - 1)
     sum = 0.0
 
     (1..@intervals - 1).each do
       sum += evaluate(@func, @wt0).floor(1)
-      @wt0 += delta
+      @wt0 += step
     end
-    func_res = delta * (evaluate(@func, @wt0) + evaluate(@func, @wt_k) / 2 + sum.floor(1))
+    func_res = step * (evaluate(@func, @wt0) + evaluate(@func, @wt_k) / 2 + sum.floor(1))
     p func_res.floor(1)
   end
 end
@@ -39,6 +40,8 @@ def test
   expression = TrapezoidalRule.new(func, wt0, wt_k, intervals)
   expression.result
 end
+
+#test
 
 puts 'Enter your formula :'
 func = gets.chomp
